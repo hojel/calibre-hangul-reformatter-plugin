@@ -28,7 +28,7 @@ Calibre FileType Plugin for Korean Text
 
 ## 옵션
 * *Reformat* : 문단 재포맷
-* *Line break by Special char* : 조판문자로 문단 예측
+* *Paragraph by Punctuation mark* : 문장부호로 문단 예측
 * *Pretty Quote char* : " 을 열기/닫기 형태로 보기좋게 변환
 * *Guess Chapter* : 챕터 자동 인식
 * *Allow Empty Paragraph* : 연속된 빈줄을 문단간 띄기로 처리

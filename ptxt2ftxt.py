@@ -15,7 +15,7 @@ PARAEND_PTN = re.compile(r'''([%s%s])\s*$''' %(SEndChr,QCloseChr),re.M|re.U)
 INDENTSTART_PTN = re.compile(r'''^([ ]{1,3})''',re.M|re.U)      # preserve Markdown block (4 spaces or tab)
 
 #------------------------------------------------------
-def ptxt2ftxt(txt, startline=1, pretty_line=False):
+def ptxt2ftxt(txt, startline=1, para_by_mark=False):
     # preprocess
     txt = preprocess(txt, startline)
     # decide paragraph style
@@ -24,7 +24,7 @@ def ptxt2ftxt(txt, startline=1, pretty_line=False):
     # paragraph
     txt2 = format_paragraph(txt, pfmt)
     # postprocess
-    txt3 = postprocess(txt2, pretty_line)
+    txt3 = postprocess(txt2, pfmt, para_by_mark)
     return txt3
 
 def ftxtclean(txt, pretty_quote=True, correct_word_break=None):
@@ -92,14 +92,16 @@ def format_paragraph(txt, pfmt_type=1):
         txt = PARAEND_PTN.sub(r'\1\n',txt)
     return txt
 
-def postprocess(txt, pretty_line):
+def postprocess(txt, pfmt_type, para_by_mark):
     # remove unnecessary indent
     txt2 = re.compile("^ {1,3}", re.M).sub("", txt)
-    if pretty_line:
+    # separate paragraph by punctuation mark
+    if pfmt_type in [3, 4] and para_by_mark:
         # insert line before quote start
         txt2 = re.compile(ur"([%s%s])\s*\n([%s])" %(SEndChr, QCloseChr, QOpenChr)).sub(ur"\1\n\n\2", txt2)
         # insert line after quote ends
         txt2 = re.compile(ur"([%s])\s*\n(\S)" %QCloseChr).sub(ur"\1\n\n\2", txt2)
+        # two quotation opening chars in a line
         #txt2 = re.compile(ur"\n([^%s].*, *[%s].*[%s])\n\n" %(QOpenChr, QOpenChr, QCloseChr)).sub(ur"\1\n", txt2)
         # line starting with special character
         txt2 = re.compile(ur"(\S)\s*\n([%s])" %SStartChr).sub(ur"\1\n\n\2", txt2)
@@ -155,7 +157,7 @@ def correct_keyword(txt):
 if __name__ == '__main__':
     import sys
     txt = open(sys.argv[1],'r').read().decode('euc-kr')
-    txt2 = ptxt2ftxt(txt, pretty_line=True)
+    txt2 = ptxt2ftxt(txt, para_by_mark=True)
     txt3 = ftxtclean(txt2, pretty_quote=True)
     open(sys.argv[2],'w').write( txt3.encode('utf-8') )
 # vim:sw=4:ts=8:et

@@ -19,7 +19,7 @@ class hTxtReformat(FileTypePlugin):
     author              = 'hojel' # The author of this plugin
     version             = (1, 1, 1)   # The version number of this plugin
     file_types          = set(['txt']) # The file types that this plugin will be applied to
-    #on_import          = True # not working
+    #on_import           = True # NOTE: not working 
     on_preprocess       = True # Run this plugin before text import
     priority            = 100
     minimum_calibre_version = (2, 0, 0)
@@ -36,7 +36,7 @@ class hTxtReformat(FileTypePlugin):
             print("reformatting...")
             from ptxt2ftxt import ptxt2ftxt, ftxtclean
             from ftxt2markdown import ftxt2markdown
-            txt = ptxt2ftxt(txt, pretty_line=prefs['pretty_line'])
+            txt = ptxt2ftxt(txt, para_by_mark=prefs['para_by_mark'])
             txt = ftxtclean(txt, pretty_quote=prefs['pretty_quote'], correct_word_break=prefs['correct_word_break'])
             txt = ftxt2markdown(txt, guessChapter=prefs['guess_chapter'], guessParaSep=prefs['insert_empty_paragraph'])
         # save as temporary file

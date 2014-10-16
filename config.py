@@ -13,7 +13,7 @@ prefs = JSONConfig('plugins/htxtreformat')
 
 # Set defaults
 prefs.defaults['reformat'] = True
-prefs.defaults['pretty_line'] = True
+prefs.defaults['para_by_mark'] = True
 prefs.defaults['pretty_quote'] = True
 prefs.defaults['correct_word_break'] = 'None'
 prefs.defaults['guess_chapter'] = True
@@ -30,8 +30,8 @@ class ConfigWidget(QWidget):
         self.cbox1.setChecked(prefs['reformat'])
         self.l.addWidget(self.cbox1)
 
-        self.cbox2 = QCheckBox('Line break by Special char')
-        self.cbox2.setChecked(prefs['pretty_line'])
+        self.cbox2 = QCheckBox('Paragraph by Ending mark')
+        self.cbox2.setChecked(prefs['para_by_mark'])
         self.l.addWidget(self.cbox2)
 
         self.cbox2 = QCheckBox('Pretty Quote char')
