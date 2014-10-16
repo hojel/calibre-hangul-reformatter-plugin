@@ -13,6 +13,7 @@ prefs = JSONConfig('plugins/htxtreformat')
 
 # Set defaults
 prefs.defaults['reformat'] = True
+prefs.defaults['pretty_line'] = True
 prefs.defaults['pretty_quote'] = True
 prefs.defaults['correct_word_break'] = 'None'
 prefs.defaults['guess_chapter'] = True
@@ -29,7 +30,11 @@ class ConfigWidget(QWidget):
         self.cbox1.setChecked(prefs['reformat'])
         self.l.addWidget(self.cbox1)
 
-        self.cbox2 = QCheckBox('Quote')
+        self.cbox2 = QCheckBox('Line break by Special char')
+        self.cbox2.setChecked(prefs['pretty_line'])
+        self.l.addWidget(self.cbox2)
+
+        self.cbox2 = QCheckBox('Pretty Quote char')
         self.cbox2.setChecked(prefs['pretty_quote'])
         self.l.addWidget(self.cbox2)
 
@@ -37,7 +42,7 @@ class ConfigWidget(QWidget):
         self.cbox3.setChecked(prefs['guess_chapter'])
         self.l.addWidget(self.cbox3)
 
-        self.cbox4 = QCheckBox('Enable Empty Paragraph')
+        self.cbox4 = QCheckBox('Allow Empty Paragraph')
         self.cbox4.setChecked(prefs['insert_empty_paragraph'])
         self.l.addWidget(self.cbox4)
 

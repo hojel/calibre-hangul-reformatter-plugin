@@ -27,8 +27,9 @@ Calibre FileType Plugin for Korean Text
   * 섹션(##)까지 목차에 넣고 싶은 경우 '2 수준 목차'에 **//h:h2** 를 지정
 
 ## 옵션
-* *Reformat* : 문단재포맷
-* *Pretty Quote*  : " 을 열기/닫기 형태로 보기좋게 변환
+* *Reformat* : 문단 재포맷
+* *Line break by Special char* : 조판문자로 문단 예측
+* *Pretty Quote char* : " 을 열기/닫기 형태로 보기좋게 변환
 * *Guess Chapter* : 챕터 자동 인식
-* *Insert Empty Paragraph* : 연속된 빈줄을 문단간 띄기로 처리
+* *Allow Empty Paragraph* : 연속된 빈줄을 문단간 띄기로 처리
 * *Correct Word Break* : 줄간 분리된 단어 교정

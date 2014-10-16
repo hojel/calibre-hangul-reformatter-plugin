@@ -36,7 +36,7 @@ class hTxtReformat(FileTypePlugin):
             print("reformatting...")
             from ptxt2ftxt import ptxt2ftxt, ftxtclean
             from ftxt2markdown import ftxt2markdown
-            txt = ptxt2ftxt(txt, pretty_quote=prefs['pretty_quote'])
+            txt = ptxt2ftxt(txt, pretty_line=prefs['pretty_line'])
             txt = ftxtclean(txt, pretty_quote=prefs['pretty_quote'], correct_word_break=prefs['correct_word_break'])
             txt = ftxt2markdown(txt, guessChapter=prefs['guess_chapter'], guessParaSep=prefs['insert_empty_paragraph'])
         # save as temporary file

@@ -15,7 +15,7 @@ PARAEND_PTN = re.compile(r'''([%s%s])\s*$''' %(SEndChr,QCloseChr),re.M|re.U)
 INDENTSTART_PTN = re.compile(r'''^([ ]{1,3})''',re.M|re.U)      # preserve Markdown block (4 spaces or tab)
 
 #------------------------------------------------------
-def ptxt2ftxt(txt, startline=1, pretty_quote=False):
+def ptxt2ftxt(txt, startline=1, pretty_line=False):
     # preprocess
     txt = preprocess(txt, startline)
     # decide paragraph style
@@ -24,7 +24,7 @@ def ptxt2ftxt(txt, startline=1, pretty_quote=False):
     # paragraph
     txt2 = format_paragraph(txt, pfmt)
     # postprocess
-    txt3 = postprocess(txt2, pretty_quote)
+    txt3 = postprocess(txt2, pretty_line)
     return txt3
 
 def ftxtclean(txt, pretty_quote=True, correct_word_break=None):
@@ -92,16 +92,17 @@ def format_paragraph(txt, pfmt_type=1):
         txt = PARAEND_PTN.sub(r'\1\n',txt)
     return txt
 
-def postprocess(txt, pretty_quote):
+def postprocess(txt, pretty_line):
     # remove unnecessary indent
     txt2 = re.compile("^ {1,3}", re.M).sub("", txt)
-    # insert line before quote start
-    txt2 = re.compile(ur"([%s%s])\s*\n([%s])" %(SEndChr, QCloseChr, QOpenChr)).sub(ur"\1\n\n\2", txt2)
-    # insert line after quote ends
-    txt2 = re.compile(ur"([%s])\s*\n(\S)" %QCloseChr).sub(ur"\1\n\n\2", txt2)
-    #txt2 = re.compile(ur"\n([^%s].*, *[%s].*[%s])\n\n" %(QOpenChr, QOpenChr, QCloseChr)).sub(ur"\1\n", txt2)
-    # line starting with special character
-    txt2 = re.compile(ur"(\S)\s*\n([%s])" %SStartChr).sub(ur"\1\n\n\2", txt2)
+    if pretty_line:
+        # insert line before quote start
+        txt2 = re.compile(ur"([%s%s])\s*\n([%s])" %(SEndChr, QCloseChr, QOpenChr)).sub(ur"\1\n\n\2", txt2)
+        # insert line after quote ends
+        txt2 = re.compile(ur"([%s])\s*\n(\S)" %QCloseChr).sub(ur"\1\n\n\2", txt2)
+        #txt2 = re.compile(ur"\n([^%s].*, *[%s].*[%s])\n\n" %(QOpenChr, QOpenChr, QCloseChr)).sub(ur"\1\n", txt2)
+        # line starting with special character
+        txt2 = re.compile(ur"(\S)\s*\n([%s])" %SStartChr).sub(ur"\1\n\n\2", txt2)
     return txt2
 
 #----------------------------------------------------------
@@ -154,7 +155,7 @@ def correct_keyword(txt):
 if __name__ == '__main__':
     import sys
     txt = open(sys.argv[1],'r').read().decode('euc-kr')
-    txt2 = ptxt2ftxt(txt, pretty_quote=True)
+    txt2 = ptxt2ftxt(txt, pretty_line=True)
     txt3 = ftxtclean(txt2, pretty_quote=True)
     open(sys.argv[2],'w').write( txt3.encode('utf-8') )
 # vim:sw=4:ts=8:et
