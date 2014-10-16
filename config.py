@@ -30,9 +30,9 @@ class ConfigWidget(QWidget):
         self.cbox1.setChecked(prefs['reformat'])
         self.l.addWidget(self.cbox1)
 
-        self.cbox2 = QCheckBox('Paragraph by Ending mark')
-        self.cbox2.setChecked(prefs['para_by_mark'])
-        self.l.addWidget(self.cbox2)
+        self.cbox5 = QCheckBox('Paragraph by Ending mark')
+        self.cbox5.setChecked(prefs['para_by_mark'])
+        self.l.addWidget(self.cbox5)
 
         self.cbox2 = QCheckBox('Pretty Quote char')
         self.cbox2.setChecked(prefs['pretty_quote'])
@@ -57,6 +57,7 @@ class ConfigWidget(QWidget):
 
     def save_settings(self):
         prefs['reformat'] = self.cbox1.isChecked()
+        prefs['para_by_mark'] = self.cbox5.isChecked()
         prefs['pretty_quote'] = self.cbox2.isChecked()
         prefs['guess_chapter'] = self.cbox3.isChecked()
         prefs['insert_empty_paragraph'] = self.cbox4.isChecked()
