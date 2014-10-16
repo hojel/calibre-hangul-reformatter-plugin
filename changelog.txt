@@ -1,2 +1,6 @@
+[B]Version 1.1.1[/B] - 2014/10/30
+change from Qt4 to Qt5
+[B]Version 1.1.0[/B] - 2013/09/30
+add User config
 [B]Version 1.0[/B] - 2013/06/28
 Initial release of plugin

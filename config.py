@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # vim:fileencoding=UTF-8:ts=4:sw=4:sta:et:sts=4:ai
-from PyQt4.Qt import QWidget, QHBoxLayout, QVBoxLayout, QCheckBox, QLabel, QComboBox
+from PyQt5.Qt import QWidget, QHBoxLayout, QVBoxLayout, QCheckBox, QLabel, QComboBox
 
 from calibre.utils.config import JSONConfig
 
 # This is where all preferences for this plugin will be stored
-# Remember that this name (i.e. plugins/interface_demo) is also
+# Remember that this name (i.e. plugins/htxtreformat) is also
 # in a global namespace, so make it as unique as possible.
 # You should always prefix your config file name with plugins/,
 # so as to ensure you dont accidentally clobber a calibre config file

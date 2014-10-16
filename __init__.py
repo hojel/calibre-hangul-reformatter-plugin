@@ -17,12 +17,12 @@ class hTxtReformat(FileTypePlugin):
     description         = 'Reformat ugly Hangul text and get pretty one'
     supported_platforms = ['windows', 'osx', 'linux'] # Platforms this plugin will run on
     author              = 'hojel' # The author of this plugin
-    version             = (0, 1, 1)   # The version number of this plugin
+    version             = (1, 1, 1)   # The version number of this plugin
     file_types          = set(['txt']) # The file types that this plugin will be applied to
     #on_import          = True # not working
     on_preprocess       = True # Run this plugin before text import
     priority            = 100
-    minimum_calibre_version = (0, 8, 0)
+    minimum_calibre_version = (2, 0, 0)
 
     def run(self, path_to_ebook):
         print("reformatter: "+path_to_ebook)
